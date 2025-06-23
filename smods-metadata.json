@@ -1,0 +1,13 @@
+{
+	"id": "reUnlock",
+	"name": "re:Unlock All",
+	"display_name": "re:Unlock All",
+	"author": ["wingedcatgirl"],
+	"description": "Allows the Unlock All button to reappear if new content has been added",
+	"prefix": "reunlock",
+	"main_file": "icon.lua",
+	"priority": 0,
+	"badge_colour": "CA7CA7",
+	"badge_text_colour": "FFFFFF",
+	"version": "1.0.0",
+}

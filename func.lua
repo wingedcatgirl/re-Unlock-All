@@ -1,5 +1,9 @@
 --#region re:Unlock All
 REUNLOCK = REUNLOCK or {}
+REUNLOCK.mod_unlock = {
+    current_option = 1,
+    option_value = "Vanilla"
+}
 ---Debug messaging
 ---@param message string The message
 ---@param level? string Log level
@@ -14,28 +18,50 @@ function REUNLOCK.say(message, level)
     print(date .. " :: " .. level .. " :: " .. logger .. " :: " .. message)
 end
 
----Checks whether everything is, in fact, unlocked
+---Checks whether everything (in a specified mod) is, in fact, unlocked
+---@param mod string ID of the mod to check; checks everything by default
 ---@return boolean
-REUNLOCK.check = function()
+REUNLOCK.check = function(mod, debug)
+    mod = (mod or "all")
+    local found = false
+
     for k, v in pairs(G.P_CENTERS) do
         if not (v.discovered and v.unlocked) then
-            --REUNLOCK.say("Locked center found")
-            return false
+            if (mod == "all") or (mod == "vanilla" and not v.mod) or (v.mod and v.mod.id == mod) then
+                if debug then
+                    REUNLOCK.say("Locked center found: "..k)
+                    found = true
+                else
+                    return false
+                end
+            end
         end
     end
     for k, v in pairs(G.P_BLINDS) do
-        if not (v.discovered and v.unlocked) then
-            --REUNLOCK.say("Locked blind found")
-            return false
+        if not (v.discovered) then
+            if (mod == "all") or (mod == "vanilla" and not v.mod) or (v.mod and v.mod.id == mod) then
+                if debug then
+                    REUNLOCK.say("Locked blind found: "..k)
+                    found = true
+                else
+                    return false
+                end
+            end
         end
     end
     for k, v in pairs(G.P_TAGS) do
-        if not (v.discovered and v.unlocked) then
-            --REUNLOCK.say("Locked tag found")
-            return false
+        if not (v.discovered) then
+            if (mod == "all") or (mod == "vanilla" and not v.mod) or (v.mod and v.mod.id == mod) then
+                if debug then
+                    REUNLOCK.say("Locked tag found: "..k)
+                    found = true
+                else
+                    return false
+                end
+            end
         end
     end
 
-    return true
+    return not found
 end
 --#endregion re:Unlock All

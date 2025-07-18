@@ -7,7 +7,7 @@ priority = 0
 target = "functions/button_callbacks.lua"
 pattern = "if G.PROFILES[G.SETTINGS.profile].all_unlocked or e.config.disable_button then"
 position = "at"
-payload = "if (G.PROFILES[G.SETTINGS.profile].all_unlocked and REUNLOCK.check()) or e.config.disable_button then"
+payload = "if (G.PROFILES[G.SETTINGS.profile].all_unlocked and REUNLOCK.check('all')) or e.config.disable_button then"
 match_indent = true
 
 [[patches]]
@@ -15,5 +15,5 @@ match_indent = true
 target = "functions/UI_definitions.lua"
 pattern = '          (_profile == G.SETTINGS.profile and not G.PROFILES[G.SETTINGS.profile].all_unlocked) and {n=G.UIT.R, config={align = "cm", padding = 0, minh = 0.7}, nodes={'
 position = "at"
-payload = '          (_profile == G.SETTINGS.profile and not (G.PROFILES[G.SETTINGS.profile].all_unlocked and REUNLOCK.check())) and {n=G.UIT.R, config={align = "cm", padding = 0, minh = 0.7}, nodes={'
+payload = '          (_profile == G.SETTINGS.profile and not (G.PROFILES[G.SETTINGS.profile].all_unlocked and REUNLOCK.check("all"))) and {n=G.UIT.R, config={align = "cm", padding = 0, minh = 0.7}, nodes={'
 match_indent = true

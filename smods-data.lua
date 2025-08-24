@@ -5,6 +5,11 @@ SMODS.Atlas({
     py = 34
 })
 
+if not SMODS.current_mod.lovely then
+    NFS.write(SMODS.current_mod.path .. '.lovelyignore', '')
+    error("re:Unlock All: Lovely patches failed! Please make sure the file structure is not nested. The mod will be automatically disabled on restart.")
+end
+
 --#region config
 G.FUNCS.reunlock_optcycle = function(args)
     local refval = args.cycle_config.ref_value
